@@ -6,10 +6,10 @@ const DATA = {
   // 1. 这里修正你的名字，不要填 git 命令哦！
   name: "ZEKAI SHI", 
   chineseName: "师 泽楷",
-  title: "RESEARCH_UNIT: DEEP CONTROL",
+  title: "RESEARCH UNIT: Geo Vision",
   
   // 2. 这里是你已有的 Bio
-  bio: "Incoming Ph.D. at CAS IGSNRR (from XJTU). I am bridging the gap between Computer Vision and Earth Observation. My mission: Building a Universal Multi-modal Vision-Language Model to decode our planet.",
+  bio: "Incoming Ph.D. at CAS IGSNRR (from XJTU). I am bridging the gap between Computer Vision and Earth Observation. \nMy mission: Building a Universal Multi-modal Vision-Language Model to decode our planet.",
   
   // ---【新增】在这里配置你的社交链接 ---
   social: {
@@ -24,7 +24,7 @@ const DATA = {
   // 3. 这里是你的论文列表
   papers: [
     {
-      id: "P-01",
+      id: "2024-09",
       title: "BresNet: Applying Residual Learning in Backpropagation Neural Networks to Predict Ground Surface Concentration of Primary Air Pollutants",
       venue: "Remote Sensing",
       desc: "A novel residual learning model improves prediction of multiple air pollutants from satellite data.",
@@ -37,7 +37,7 @@ const DATA = {
       }
     },
     {
-      id: "P-02",
+      id: "2023-11",
       title: "Super-resolution reconstruction of 3 arc-second global DEM dataset",
       venue: "11th Academic Conference of Geology Resource Management and Sustainable Development 2023",
       // 这里是论文的描述
@@ -199,7 +199,7 @@ export default function App() {
             {/* Logs */}
             <div className="font-mono-clean">
               <h3 className="text-sm font-bold bg-[#1f3322] text-[#e0e6e0] inline-block px-2 py-1 mb-4 font-pixel">
-                UPDATE_LOG
+                News Update
               </h3>
               <ul className="space-y-4 relative border-l-2 border-[#1f3322]/20 pl-4 ml-2">
                 {DATA.news.map((item, idx) => (
@@ -224,7 +224,7 @@ export default function App() {
           <div className="md:col-span-8">
              <div className="flex items-center gap-3 mb-8">
                 <Cpu size={24} className="text-[#1f3322]" />
-                <span className="font-pixel text-lg">RESEARCH_MODULES</span>
+                <span className="font-pixel text-lg">PUBLICATIONS</span>
                 <div className="h-0.5 flex-grow bg-[#1f3322] opacity-20"></div>
              </div>
 
