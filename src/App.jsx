@@ -48,8 +48,8 @@ const SHARED_DATA = {
   news: [
     {
       date: "2026.01",
-      en: { text: "New paper submitted", type: "JOURNAL" },
-      zh: { text: "新论文提交", type: "论文" }
+      en: { text: "New paper submitted to Remote Sensing of Environment", type: "JOURNAL" },
+      zh: { text: "新论文提交至 Remote Sensing of Environment", type: "论文" }
     },
     { 
       date: "2024.08", 
