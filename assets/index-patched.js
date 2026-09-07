@@ -10,6 +10,8 @@ source = source.replaceAll(
   "https://www.researchgate.net/profile/Zekai-Shi?ev=hdr_xprf",
   "https://scholar.google.com/citations?user=ThRaJWoAAAAJ&hl=en&oi=ao"
 );
+source = source.replaceAll("西安交通大学 准博士。", "西安交通大学 博士。");
+source = source.replaceAll("Incoming Ph.D. at XJTU.", "Ph.D. at XJTU.");
 source = source.replace(
   'news:[{date:"2026.01"',
   'news:[{date:"2026.09",en:{text:"Latest paper accepted by IEEE Transactions on Geoscience and Remote Sensing (TGRS)",type:"JOURNAL"},zh:{text:"最新论文已被 IEEE Transactions on Geoscience and Remote Sensing (TGRS) 接收",type:"期刊"}},{date:"2026.01"'
