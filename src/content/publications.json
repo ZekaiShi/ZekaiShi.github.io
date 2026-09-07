@@ -1,0 +1,62 @@
+[
+  {
+    "id": "2026-09",
+    "links": {
+      "pdf": "https://arxiv.org/abs/2607.18856",
+      "code": "#",
+      "project": "#"
+    },
+    "en": {
+      "title": "Think Sparse, Predict Dense: Continuous Thought Machines for Image Super-Resolution",
+      "venue": "IEEE TGRS (Accepted)",
+      "desc": "A continuous-thought architecture that turns compact latent reasoning into dense, spatially aligned queries for progressive image super-resolution.",
+      "tags": ["Image Super-Resolution", "Continuous Thought", "Dense Vision"]
+    },
+    "zh": {
+      "title": "稀疏思考，密集预测：面向图像超分辨率的连续思维机器",
+      "venue": "IEEE TGRS（已接收）",
+      "desc": "一种连续思维架构，将紧凑的潜在推理转化为空间对齐的密集查询，实现渐进式图像超分辨率。",
+      "tags": ["图像超分辨率", "连续思维", "密集视觉"]
+    }
+  },
+  {
+    "id": "2024-09",
+    "links": {
+      "pdf": "https://www.mdpi.com/2072-4292/16/16/2897",
+      "code": "#",
+      "project": "#"
+    },
+    "en": {
+      "title": "BresNet: Applying Residual Learning in Backpropagation Neural Networks",
+      "venue": "Remote Sensing",
+      "desc": "A novel residual learning model improves prediction of multiple air pollutants from satellite data.",
+      "tags": ["Residual Learning", "BPNN", "Air Pollutants"]
+    },
+    "zh": {
+      "title": "BresNet: 在反向传播神经网络中应用残差学习预测主要空气污染物地面浓度",
+      "venue": "Remote Sensing（遥感）",
+      "desc": "一种新颖的残差学习模型，利用卫星数据改进了多种空气污染物的预测。",
+      "tags": ["残差学习", "BP神经网络", "空气污染物"]
+    }
+  },
+  {
+    "id": "2023-11",
+    "links": {
+      "pdf": "#",
+      "code": "#",
+      "project": "#"
+    },
+    "en": {
+      "title": "Super-resolution reconstruction of 3 arc-second global DEM dataset",
+      "venue": "11th Academic Conf. Geology",
+      "desc": "A deep learning approach improves global DEM resolution, reducing ocean mapping needs.",
+      "tags": ["Super-resolution", "Deep Learning", "Global DEM"]
+    },
+    "zh": {
+      "title": "3角秒全球DEM数据集的超分辨率重建",
+      "venue": "第十一届地质资源管理学术会议",
+      "desc": "一种深度学习方法，提高了全球DEM分辨率，减少了海洋测绘的需求。",
+      "tags": ["超分辨率", "深度学习", "全球DEM"]
+    }
+  }
+]

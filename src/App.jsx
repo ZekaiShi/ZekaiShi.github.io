@@ -1,75 +1,34 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { Activity, FileText, Cpu, Github, Radio, Terminal, ExternalLink, ArrowRight, Languages, Globe, Sparkles, Zap, Monitor, LayoutGrid, ShieldAlert, Ban, Moon, Sun } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { FileText, Cpu, Github, Radio, Terminal, ExternalLink, ArrowRight, Languages, Globe, Sparkles, Zap, ShieldAlert, Ban, Moon, Sun } from 'lucide-react';
+import newsData from './content/news.json';
+import publicationsData from './content/publications.json';
 
 // ==========================================
 //               数据配置区域
 // ==========================================
 
-const SHARED_DATA = {
-  social: {
-    github: "https://github.com/ZekaiShi",
-    scholar: "https://www.researchgate.net/profile/Zekai-Shi?ev=hdr_xprf",
-    email: "mailto:shizk2000@outlook.com",
-  },
-  papers: [
-    {
-      id: "2024-09",
-      links: { pdf: "https://www.mdpi.com/2072-4292/16/16/2897", code: "#", project: "#" },
-      en: {
-        title: "BresNet: Applying Residual Learning in Backpropagation Neural Networks",
-        venue: "Remote Sensing",
-        desc: "A novel residual learning model improves prediction of multiple air pollutants from satellite data.",
-        tags: ["Residual Learning", "BPNN", "Air Pollutants"]
-      },
-      zh: {
-        title: "BresNet: 在反向传播神经网络中应用残差学习预测主要空气污染物地面浓度",
-        venue: "Remote Sensing (遥感)",
-        desc: "一种新颖的残差学习模型，利用卫星数据改进了多种空气污染物的预测。",
-        tags: ["残差学习", "BP神经网络", "空气污染物"]
-      }
-    },
-    {
-      id: "2023-11",
-      links: { pdf: "#", code: "#", project: "#" },
-      en: {
-        title: "Super-resolution reconstruction of 3 arc-second global DEM dataset",
-        venue: "11th Academic Conf. Geology",
-        desc: "A deep learning approach improves global DEM resolution, reducing ocean mapping needs.",
-        tags: ["Super-resolution", "Deep Learning", "Global DEM"]
-      },
-      zh: {
-        title: "3角秒全球DEM数据集的超分辨率重建",
-        venue: "第十一届地质资源管理学术会议",
-        desc: "一种深度学习方法，提高了全球DEM分辨率，减少了海洋测绘的需求。",
-        tags: ["超分辨率", "深度学习", "全球DEM"]
-      }
-    }
-  ],
-  news: [
-    {
-      date: "2026.01",
-      en: { text: "New paper submitted to Remote Sensing of Environment", type: "JOURNAL" },
-      zh: { text: "新论文提交至 Remote Sensing of Environment", type: "论文" }
-    },
-    { 
-      date: "2024.08", 
-      en: { text: "Paper published to Remote Sensing", type: "JOURNAL" },
-      zh: { text: "论文发表于 Remote Sensing", type: "期刊" }
-    }
-  ]
+const SOCIAL_LINKS = {
+  github: "https://github.com/ZekaiShi",
+  scholar: "https://scholar.google.com/citations?user=ThRaJWoAAAAJ&hl=en&oi=ao",
+  email: "mailto:shizk2000@outlook.com",
 };
 
 const UI_LABELS = {
   en: {
     name: "ZEKAI SHI",
     role: "Developer / Researcher",
+    subName: "Researcher",
     title: "Geo Vision Model Developer",
-    bio: "> LOAD_KERNEL: {zekai|ZEKAI} SHI... [OK]\n\nIncoming Ph.D. at XJTU.\n\n[MISSION_TARGET]:\nBridging Computer Vision & Earth Observation.\nBuilding a Universal Multi-modal Vision-Language Model to decode our planet.\n\n> STATUS: READY_TO_CONNECT_",
-    intro: "Incoming Ph.D. at XJTU.",
+    bio: "> LOAD_KERNEL: {zekai|ZEKAI} SHI... [OK]\n\nPh.D. at XJTU.\n\n[MISSION_TARGET]:\nBridging Computer Vision & Earth Observation.\nBuilding a Universal Multi-modal Vision-Language Model to decode our planet.\n\n> STATUS: READY_TO_CONNECT_",
+    intro: "Ph.D. at XJTU.",
     labels: {
+      status: "SYSTEM ONLINE",
       newsTitle: "Latest Updates",
       pubTitle: "Publications",
       btnLang: "中文", 
+      btnGithub: "GitHub",
+      btnScholar: "Scholar",
+      btnEmail: "Email",
       linkPdf: "PDF",
       linkCode: "Code",
       linkProject: "Project",
@@ -83,13 +42,18 @@ const UI_LABELS = {
   zh: {
     name: "师 泽楷",
     role: "程序猿 / 研究牲",
+    subName: "研究者",
     title: "地理视觉模型开发者",
-    bio: "> 加载内核用户: {shizekai|师泽楷}... [成功]\n\n{zhongguo|中国}自西安交通大学 准博士。\n\n[核心任务]:\n连接计算机视觉与地球观测技术。\n构建通用的多模态视觉-语言模型以解码我们的星球。\n\n> 终端状态: 等待指令_",
-    intro: "西安交通大学 准博士。",
+    bio: "> 加载内核用户: {shizekai|师泽楷}... [成功]\n\n西安交通大学 博士。\n\n[核心任务]:\n连接计算机视觉与地球观测技术。\n构建通用的多模态视觉-语言模型以解码我们的星球。\n\n> 终端状态: 等待指令_",
+    intro: "西安交通大学 博士。",
     labels: {
+      status: "系统在线",
       newsTitle: "最新动态",
       pubTitle: "出版物",
       btnLang: "English", 
+      btnGithub: "GitHub",
+      btnScholar: "学术主页",
+      btnEmail: "邮箱",
       linkPdf: "论文",
       linkCode: "代码",
       linkProject: "项目",
@@ -106,9 +70,9 @@ function getMergedData(lang) {
   const ui = UI_LABELS[lang];
   return {
     ...ui, 
-    social: SHARED_DATA.social, 
-    news: SHARED_DATA.news.map(item => ({ date: item.date, ...item[lang] })),
-    papers: SHARED_DATA.papers.map(paper => ({ id: paper.id, links: paper.links, ...paper[lang] }))
+    social: SOCIAL_LINKS,
+    news: newsData.map(item => ({ date: item.date, ...item[lang] })),
+    papers: publicationsData.map(paper => ({ id: paper.id, links: paper.links, ...paper[lang] }))
   };
 }
 
@@ -255,14 +219,15 @@ function RetroTV({ text, labels }) {
   );
 }
 
+const BOOT_TEXT = ["BIOS DATE 01/12/2025 VER 1.0.2", "CPU: NEURAL_PROCESSOR @ 4.20GHz", "Checking Memory... OK", "Loading Drivers... DONE", " > BOOT_SEQUENCE_COMPLETE"];
+
 function BootScreen({ onComplete }) {
   const [lines, setLines] = useState([]);
-  const bootText = ["BIOS DATE 01/12/2025 VER 1.0.2", "CPU: NEURAL_PROCESSOR @ 4.20GHz", "Checking Memory... OK", "Loading Drivers... DONE", " > BOOT_SEQUENCE_COMPLETE"];
   useEffect(() => {
     let delay = 0;
-    bootText.forEach((line, index) => {
+    BOOT_TEXT.forEach((line, index) => {
       delay += Math.random() * 200 + 50; 
-      setTimeout(() => { setLines(prev => [...prev, line]); if (index === bootText.length - 1) setTimeout(onComplete, 800); }, delay);
+      setTimeout(() => { setLines(prev => [...prev, line]); if (index === BOOT_TEXT.length - 1) setTimeout(onComplete, 800); }, delay);
     });
   }, [onComplete]);
   return (
@@ -298,10 +263,11 @@ function RetroButton({ label, icon, setCursor, onClick, active }) {
     const { left, top, width, height } = ref.current.getBoundingClientRect();
     setPos({ x: (e.clientX - (left + width/2)) * 0.2, y: (e.clientY - (top + height/2)) * 0.2 });
   };
+  const Tag = onClick ? 'button' : 'span';
   return (
-    <button ref={ref} onClick={onClick} onMouseMove={handleMouseMove} onMouseEnter={() => setCursor('hover')} onMouseLeave={() => { setPos({x:0,y:0}); setCursor('default'); }} style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }} className={`flex items-center gap-2 px-4 py-2 font-pixel text-[10px] transition-colors duration-200 shadow-[4px_4px_0px_rgba(0,0,0,0.1)] ${active ? 'bg-[#d35400] text-white' : 'bg-[#1f3322] text-[#e0e6e0] hover:bg-[#d35400]'}`}>
+    <Tag ref={ref} type={onClick ? 'button' : undefined} onClick={onClick} onMouseMove={handleMouseMove} onMouseEnter={() => setCursor('hover')} onMouseLeave={() => { setPos({x:0,y:0}); setCursor('default'); }} style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }} className={`flex items-center gap-2 px-4 py-2 font-pixel text-[10px] transition-colors duration-200 shadow-[4px_4px_0px_rgba(0,0,0,0.1)] ${active ? 'bg-[#d35400] text-white' : 'bg-[#1f3322] text-[#e0e6e0] hover:bg-[#d35400]'}`}>
       {icon} {label}
-    </button>
+    </Tag>
   );
 }
 
@@ -548,15 +514,28 @@ const ParticleWorldMap = React.memo(({ className = "" }) => {
 // ==========================================
 
 export default function App() {
-  const [theme, setTheme] = useState('retro'); // 'retro' | 'modern'
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('profile-theme');
+    if (savedTheme === 'retro' || savedTheme === 'modern') return savedTheme;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'modern' : 'retro';
+  });
   const [lang, setLang] = useState('en');
-  const [booted, setBooted] = useState(false);
+  const [booted, setBooted] = useState(() => sessionStorage.getItem('profile-booted') === 'true' || window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [cursorVariant, setCursorVariant] = useState('default');
   const [toast, setToast] = useState({ show: false, msg: '' });
 
   const currentData = getMergedData(lang);
   const toggleLanguage = () => setLang(prev => prev === 'en' ? 'zh' : 'en');
+  const updateTheme = (updater) => setTheme(prev => {
+    const nextTheme = typeof updater === 'function' ? updater(prev) : updater;
+    localStorage.setItem('profile-theme', nextTheme);
+    return nextTheme;
+  });
+  const completeBoot = () => {
+    sessionStorage.setItem('profile-booted', 'true');
+    setBooted(true);
+  };
   const triggerToast = (msg) => { setToast({ show: true, msg }); setTimeout(() => setToast({ show: false, msg: '' }), 3000); };
 
   useEffect(() => {
@@ -571,6 +550,19 @@ export default function App() {
     window.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mouseup', handleMouseUp);
     return () => { window.removeEventListener('mousedown', handleMouseDown); window.removeEventListener('mouseup', handleMouseUp); };
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  }, [lang]);
+
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    const syncTheme = (event) => {
+      if (!localStorage.getItem('profile-theme')) setTheme(event.matches ? 'modern' : 'retro');
+    };
+    media.addEventListener('change', syncTheme);
+    return () => media.removeEventListener('change', syncTheme);
   }, []);
 
   // --- RENDER ---
@@ -596,13 +588,20 @@ export default function App() {
         .delay-300 { animation-delay: 0.3s; }
 
         body { cursor: none; } a, button { cursor: none; }
+        @media (pointer: coarse), (prefers-reduced-motion: reduce) {
+          body, a, button { cursor: auto; }
+          .custom-cursor { display: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+        }
       `}</style>
 
-      <UnifiedCursor x={mousePos.x} y={mousePos.y} variant={cursorVariant} theme={theme} />
+      <div className="custom-cursor"><UnifiedCursor x={mousePos.x} y={mousePos.y} variant={cursorVariant} theme={theme} /></div>
       
       <ThemeSwitcher 
         theme={theme} 
-        setTheme={setTheme} 
+        setTheme={updateTheme}
         toast={toast} 
         setCursorVariant={setCursorVariant} 
         currentData={currentData}
@@ -611,7 +610,7 @@ export default function App() {
       {/* ====== 模式 A: 复古终端 (Retro) ====== */}
       {theme === 'retro' && (
         <div className="min-h-screen bg-[#e0e6e0] text-[#1f3322] font-sans-cool selection:bg-[#1f3322] selection:text-[#e0e6e0]">
-          {!booted && <BootScreen onComplete={() => setBooted(true)} />}
+          {!booted && <BootScreen onComplete={completeBoot} />}
           {booted && (
             <div className="animate-[turn-on_0.5s_ease-out]">
               <div className="fixed inset-0 dot-matrix-bg opacity-30 pointer-events-none z-0"></div>
@@ -637,7 +636,7 @@ export default function App() {
                   <div className="md:col-span-5 space-y-10">
                     <RetroTV text={currentData.bio} labels={currentData.labels} />
                     <div>
-                      <h3 className="text-sm font-bold bg-[#1f3322] text-[#e0e6e0] inline-block px-2 py-1 mb-4 font-pixel">{currentData.labels.newsTitle}</h3>
+                      <h2 className="text-sm font-bold bg-[#1f3322] text-[#e0e6e0] inline-block px-2 py-1 mb-4 font-pixel">{currentData.labels.newsTitle}</h2>
                       <ul className="space-y-4 relative border-l-2 border-[#1f3322]/20 pl-4 ml-2">
                         {currentData.news.map((item, idx) => (
                           <li key={idx} className="relative group cursor-none" onMouseEnter={() => setCursorVariant('hover')} onMouseLeave={() => setCursorVariant('default')}>
@@ -650,7 +649,7 @@ export default function App() {
                     </div>
                   </div>
                   <div className="md:col-span-7">
-                     <div className="flex items-center gap-3 mb-8"><Cpu size={24} className="text-[#1f3322]" /><span className="font-pixel text-lg">{currentData.labels.pubTitle}</span><div className="h-0.5 flex-grow bg-[#1f3322] opacity-20"></div></div>
+                     <div className="flex items-center gap-3 mb-8"><Cpu size={24} className="text-[#1f3322]" /><h2 className="font-pixel text-lg">{currentData.labels.pubTitle}</h2><div className="h-0.5 flex-grow bg-[#1f3322] opacity-20"></div></div>
                      <div className="space-y-8">
                        {currentData.papers.map((paper, idx) => (
                          <TiltCard key={idx} setCursor={setCursorVariant}>
@@ -682,7 +681,7 @@ export default function App() {
           <nav className="fixed top-0 left-0 right-0 z-40 border-b border-white/5 bg-black/50 backdrop-blur-xl">
             <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
               <div className="flex items-center gap-2"><div className="relative flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg"><span className="font-bold text-white">Z</span><div className="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/20"></div></div><span className="font-sans font-bold tracking-tight text-white/90 hidden md:block">{currentData.name}</span></div>
-              <div className="flex items-center gap-4"><button onClick={toggleLanguage} className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 text-xs text-zinc-400 hover:bg-white/10 hover:text-white transition-colors"><Globe size={14} />{currentData.labels.btnLang}</button><div className="h-4 w-px bg-white/10"></div><div className="flex gap-2"><a href={currentData.social.github} target="_blank" className="text-zinc-400 hover:text-white transition-colors"><Github size={18}/></a><a href={currentData.social.scholar} target="_blank" className="text-zinc-400 hover:text-white transition-colors"><Radio size={18}/></a><a href={currentData.social.email} className="text-zinc-400 hover:text-white transition-colors"><Terminal size={18}/></a></div></div>
+              <div className="flex items-center gap-4"><button onClick={toggleLanguage} className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 text-xs text-zinc-400 hover:bg-white/10 hover:text-white transition-colors"><Globe size={14} />{currentData.labels.btnLang}</button><div className="h-4 w-px bg-white/10"></div><div className="flex gap-3"><a href={currentData.social.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub" className="text-zinc-400 hover:text-white transition-colors"><Github size={18}/></a><a href={currentData.social.scholar} target="_blank" rel="noopener noreferrer" aria-label="Google Scholar" title="Google Scholar" className="text-zinc-400 hover:text-white transition-colors"><Radio size={18}/></a><a href={currentData.social.email} aria-label="Email" title="Email" className="text-zinc-400 hover:text-white transition-colors"><Terminal size={18}/></a></div></div>
             </div>
           </nav>
 
