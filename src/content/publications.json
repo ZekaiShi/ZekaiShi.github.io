@@ -1,25 +1,5 @@
 [
   {
-    "id": "2026-09",
-    "links": {
-      "pdf": "https://arxiv.org/abs/2607.18856",
-      "code": "#",
-      "project": "#"
-    },
-    "en": {
-      "title": "Think Sparse, Predict Dense: Continuous Thought Machines for Image Super-Resolution",
-      "venue": "IEEE TGRS (Accepted)",
-      "desc": "A continuous-thought architecture that turns compact latent reasoning into dense, spatially aligned queries for progressive image super-resolution.",
-      "tags": ["Image Super-Resolution", "Continuous Thought", "Dense Vision"]
-    },
-    "zh": {
-      "title": "稀疏思考，密集预测：面向图像超分辨率的连续思维机器",
-      "venue": "IEEE TGRS（已接收）",
-      "desc": "一种连续思维架构，将紧凑的潜在推理转化为空间对齐的密集查询，实现渐进式图像超分辨率。",
-      "tags": ["图像超分辨率", "连续思维", "密集视觉"]
-    }
-  },
-  {
     "id": "2024-09",
     "links": {
       "pdf": "https://www.mdpi.com/2072-4292/16/16/2897",
