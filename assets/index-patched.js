@@ -4,6 +4,27 @@
 const originalUrl = "/assets/index-Dy90beag.js";
 const response = await fetch(originalUrl);
 let source = await response.text();
+const [newsResponse, publicationsResponse] = await Promise.all([
+  fetch("/content/news.json"),
+  fetch("/content/publications.json")
+]);
+const news = await newsResponse.json();
+const publications = await publicationsResponse.json();
+const dynamicData = {
+  social: {
+    github: "https://github.com/ZekaiShi",
+    scholar: "https://scholar.google.com/citations?user=ThRaJWoAAAAJ&hl=en&oi=ao",
+    email: "mailto:shizk2000@outlook.com"
+  },
+  papers: publications,
+  news: news.map((item) => ({
+    date: item.date,
+    en: {text: item.en, type: item.type},
+    zh: {text: item.zh, type: item.type === "JOURNAL" ? "期刊" : item.type}
+  }))
+};
+
+source = source.replace(/vf=\{social:[\s\S]*?\},Wm=/, "vf=" + JSON.stringify(dynamicData) + ",Wm=");
 
 source = source.replaceAll("{zhongguo|中国}", "中国");
 source = source.replaceAll(
