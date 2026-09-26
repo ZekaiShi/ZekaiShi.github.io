@@ -1,5 +1,25 @@
 [
   {
+    "id": "2026-09",
+    "links": {
+      "pdf": "https://doi.org/10.1109/TGRS.2026.3731980",
+      "code": "#",
+      "project": "#"
+    },
+    "en": {
+      "title": "Bridging the Semantic Gap in Surface Pollutant Retrieval via Implicit Tensor Alignment of Heterogeneous Satellite Data",
+      "venue": "IEEE Transactions on Geoscience and Remote Sensing, 64, 4112416 (2026)",
+      "desc": "An implicit tensor-alignment approach for bridging cross-sensor semantic gaps in surface pollutant retrieval from heterogeneous satellite data.",
+      "tags": ["Surface Pollutant Retrieval", "Implicit Tensor Alignment", "Heterogeneous Satellite Data"]
+    },
+    "zh": {
+      "title": "通过异构卫星数据的隐式张量对齐弥合地表污染物反演中的语义鸿沟",
+      "venue": "IEEE Transactions on Geoscience and Remote Sensing，第 64 卷，4112416（2026）",
+      "desc": "一种面向异构卫星数据的隐式张量对齐方法，用于弥合跨传感器语义差异并提升地表污染物反演。",
+      "tags": ["地表污染物反演", "隐式张量对齐", "异构卫星数据"]
+    }
+  },
+  {
     "id": "2024-09",
     "links": {
       "pdf": "https://www.mdpi.com/2072-4292/16/16/2897",

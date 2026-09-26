@@ -2,11 +2,11 @@
   {
     "date": "2026.09",
     "en": {
-      "text": "Latest paper accepted by IEEE Transactions on Geoscience and Remote Sensing (TGRS)",
+      "text": "Paper published in IEEE Transactions on Geoscience and Remote Sensing (TGRS): Bridging the Semantic Gap in Surface Pollutant Retrieval",
       "type": "JOURNAL"
     },
     "zh": {
-      "text": "最新论文已被 IEEE Transactions on Geoscience and Remote Sensing (TGRS) 接收",
+      "text": "论文发表于 IEEE Transactions on Geoscience and Remote Sensing (TGRS)：通过隐式张量对齐弥合地表污染物反演中的语义鸿沟",
       "type": "期刊"
     }
   },
