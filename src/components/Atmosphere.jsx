@@ -87,6 +87,18 @@ export default function Atmosphere({ motion, theme }) {
       <div className="ambient-orb orb-two" />
       <div className="ambient-orb orb-three" />
       <div className="ambient-grid" />
+      <svg
+        className="ambient-contours"
+        viewBox="0 0 1440 1000"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        {Array.from({ length: 7 }, (_, index) => (
+          <path
+            key={index}
+            d={`M ${820 + index * 28} -80 C ${350 + index * 23} 170, ${1570 + index * 18} 360, ${950 + index * 32} 680 S ${530 + index * 30} 1050, ${720 + index * 40} 1150`}
+          />
+        ))}
+      </svg>
       <canvas ref={canvasRef} />
       <div className="pointer-glow" />
       <div className="ambient-wordmark">GEO_LAB</div>

@@ -284,6 +284,7 @@ export default function ResearchConsole({ lang, focus, setFocus, motion }) {
   return (
     <GlassSurface
       as="section"
+      elastic
       className="research-console enter"
       id="research"
       motion={motion}

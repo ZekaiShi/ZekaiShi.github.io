@@ -15,6 +15,7 @@ export default function PublicationCard({ paper, lang, index, copy, motion }) {
   return (
     <GlassSurface
       as="article"
+      elastic
       className={`publication-card ${index === 0 ? "featured" : ""}`}
       motion={motion}
     >

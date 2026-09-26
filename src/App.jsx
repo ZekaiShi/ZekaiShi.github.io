@@ -17,6 +17,7 @@ import TerminalBio from "./components/TerminalBio";
 import PublicationCard from "./components/PublicationCard";
 import DisplayControls from "./components/DisplayControls";
 import GlassSurface from "./components/GlassSurface";
+import LiquidCursor from "./components/LiquidCursor";
 
 export default function App() {
   const preferences = usePreferences();
@@ -224,6 +225,7 @@ export default function App() {
         </footer>
       </main>
       <DisplayControls {...preferences} copy={copy} />
+      <LiquidCursor motion={motion} />
     </div>
   );
 }

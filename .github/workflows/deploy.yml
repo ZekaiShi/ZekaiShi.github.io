@@ -31,6 +31,9 @@ jobs:
       - name: Check source
         run: npm run lint
 
+      - name: Test liquid geometry and springs
+        run: node --test tests/liquidPhysics.test.mjs
+
       - name: Build
         run: npm run build
 
